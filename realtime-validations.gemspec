@@ -7,16 +7,16 @@ require "realtime-validations/version"
 Gem::Specification.new do |s|
   s.name        = "realtime-validations"
   s.version     = RealtimeValidations::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of RealtimeValidations."
-  s.description = "TODO: Description of RealtimeValidations."
+  s.authors     = ["Rafael Fernández López"]
+  s.email       = ["ereslibre@gmail.com"]
+  s.homepage    = "http://www.ereslibre.es/"
+  s.summary     = "Provides real time validations for free"
+  s.description = "Form real time validations for free on Rails applications"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 3.2.0.rc1"
+  s.add_dependency "rails", "~> 3.1.3"
 
   s.add_development_dependency "sqlite3"
 end
