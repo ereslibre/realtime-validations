@@ -23,17 +23,19 @@ function rt_validations_bind_field_on_blur()
   var matched = field_name.match(/(\w+)\[(\w+)_confirmation\]/);
   var data_to_send = null;
   var current_value = field.val();
-  var token = $('meta[name=session_token]').attr('content');
 
   if (matched) {
     var field_canonical_namespace = matched[1];
     var field_canonical_name = matched[2];
     var validation_value = $('#' + field_canonical_namespace + '_' + field_canonical_name).val();
     data_to_send = { field: field_name.replace("_confirmation", ""), value: current_value,
-                     validates: validation_value, token: token, model: model };
+                     validates: validation_value, model: model };
   } else {
-    data_to_send = { field: field_name, value: current_value, token: token, model: model };
+    data_to_send = { field: field_name, value: current_value, model: model };
   }
+
+  var custom_data_to_send = rt_validations_custom_fields();
+  $.extend(data_to_send, custom_data_to_send);
 
   $.post(validation_path, data_to_send, function(data) {
     if ($.isEmptyObject(data.errors)) {
