@@ -6,6 +6,7 @@ class RealtimeValidationsGenerator < Rails::Generators::NamedBase
 
   def copy_initializer_file
     copy_file 'initializer.rb', 'config/initializers/realtime_validations_initializer.rb'
+    copy_file 'realtime_validations.js', 'app/assets/javascripts/realtime_validations.js'
   end
 
 end
