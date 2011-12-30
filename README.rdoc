@@ -1,3 +1,45 @@
-= RealtimeValidations
+= Realtime Validations for Rails
 
-This project rocks and uses MIT-LICENSE.
+Gem that is able to run validations on models while the form is being filled by the user.
+
+== Setup
+
+=== Gemfile
+
+  require 'realtime-validations'
+
+=== Running generators
+
+  rails g realtime_validations realtime_validations
+
+Read more about what the generators do on the Wiki pages.
+
+=== Putting everything together
+
+=== Application Layout
+
+Include javascripts and stylesheets (optionally) from the engine in your layout file:
+
+  <%= stylesheet_link_tag    'application', 'realtime_validations/core' %>
+  <%= javascript_include_tag 'application', 'realtime_validations/core' %>
+
+==== Views
+
+You should use:
+
+  form_validated_for
+
+=== Check if the engine is correctly imported
+
+Run:
+
+  rake routes
+
+and check if it contains a route for:
+
+  POST   /validations/*args(.:format) realtime_validations/validations#validate
+
+=== Examples
+
+https://github.com/ereslibre/realtime-validations-examples contains some examples that can
+be of use if you are starting to use this gem.
