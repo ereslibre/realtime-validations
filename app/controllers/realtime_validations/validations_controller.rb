@@ -2,6 +2,8 @@ module RealtimeValidations
 
   class ValidationsController < ApplicationController
 
+    include Controller
+
     def validate
       model_name = params[:model]
       request.path =~ /^\/validations(.+)$/
@@ -24,7 +26,7 @@ module RealtimeValidations
       end
       model.send "#{field}=", value
       model.send "#{field}_confirmation=", validates if validates
-      before_validate model
+      before_model_validation model if respond_to? :before_model_validation
       begin
         model.valid?
       rescue
@@ -34,10 +36,6 @@ module RealtimeValidations
         format.json { render :json => { :field => params[:field],
                                         :errors => errors } }
       end
-    end
-
-    def before_validate(model)
-      raise NotImplementedError
     end
 
     private

@@ -1,8 +1,11 @@
 module RealtimeValidations
 
-  class ValidationsController < ApplicationController
+  module Controller
 
-    def before_validate(model)
+    def self.included(base)
+    end
+
+    def before_model_validation(model)
     end
 
   end
