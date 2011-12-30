@@ -10,7 +10,11 @@ module RealtimeValidations
       request_path = $1
       args = remove_unused_args Rails.application.routes.recognize_path(request_path)
       field = params[:field]
-      return unless field =~ /^[^\[]+\[(\w+)\]$/
+      if not field =~ /^[^\[]+\[(\w+)\]$/
+        render :json => { :field => params[:field],
+                          :errors => [] }
+        return
+      end
       field = $1
       value = params[:value]
       validates = params[:validates]
