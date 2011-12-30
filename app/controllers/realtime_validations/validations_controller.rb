@@ -2,10 +2,6 @@ module RealtimeValidations
 
   class ValidationsController < ApplicationController
 
-    skip_before_filter :ensure_token_exists
-    skip_before_filter :ensure_has_permissions
-    before_filter :fetch_token_if_exists
-
     def validate
       model_name = params[:model]
       request.path =~ /^\/validations(.+)$/
@@ -28,8 +24,7 @@ module RealtimeValidations
       end
       model.send "#{field}=", value
       model.send "#{field}_confirmation=", validates if validates
-      model.send "client_id=", @client.id if @client and model.respond_to? :client_id=
-      model.send "user_id=", @client_user.id if @client_user and model.respond_to? :user_id=
+      before_validate model
       begin
         model.valid?
       rescue
@@ -41,15 +36,11 @@ module RealtimeValidations
       end
     end
 
-    private
-
-    def fetch_token_if_exists
-      return unless @token
-      session = UserSession.find_by_token(@token)
-      return unless session
-      @client_user = session.user
-      @client = session.client
+    def before_validate(model)
+      raise NotImplementedError
     end
+
+    private
 
     def remove_unused_args(args)
       [:action, :controller].each { |key| args.delete key }
