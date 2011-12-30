@@ -2,6 +2,28 @@
 
 Gem that is able to run validations on models while the form is being filled by the user.
 
+== Why
+
+It is smart in the sense that is able to fulfill almost any kind of validation. For instance, if
+configured properly, it can run even validations that are :scoped by some other model.
+
+Also, it allows to add some information based on the current session, user, client... so the model
+to be created or edited can be linked to that session, user or client.
+
+It is very generic and is not tied to any specific case of use.
+
+== How it works
+
+It is installed a listener on every field of the form to be validated, so when the user leaves the
+field, a petition is made to the server. The server (the ValidationsController class) will then create
+a new model of that type, or will find the current one (if it is an edit/update operation). Then,
+the property that was edited by the user is set to this recently created model instance. Right
+afterwards, it is called a helper that will allow you (the developer) to set some special fields
+that have importance to you, as the session, current client or current user, in order to be able to
+correctly process all validations, even those that are scoped on the current user, for example. After
+calling your helper, the valid? method is called on the model; the errors[:field_name] is retrieved
+and returned to the client, for the JQuery code to process and modify the DOM.
+
 == Setup
 
 === Gemfile
