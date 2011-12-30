@@ -1,4 +1,6 @@
-class InitializerGenerator < Rails::Generators::NamedBase
+require 'rails/generators'
+
+class RealtimeValidationsInitializerGenerator < Rails::Generators::NamedBase
 
   source_root File.join(File.dirname(__FILE__), 'templates')
 
