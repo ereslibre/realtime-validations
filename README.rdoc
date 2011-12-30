@@ -32,7 +32,7 @@ and returned to the client, for the JQuery code to process and modify the DOM.
 
 === Running generators
 
-  rails g realtime_validations realtime_validations
+  rails g realtime_validations:install
 
 Read more about what the generators do on the Wiki pages.
 
