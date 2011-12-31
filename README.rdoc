@@ -16,7 +16,7 @@ It is very generic and is not tied to any specific case of use.
 
 === Gemfile
 
-  require 'realtime-validations'
+  gem 'realtime-validations'
 
 === Running generators
 
