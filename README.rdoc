@@ -4,25 +4,13 @@ Gem that is able to run validations on models while the form is being filled by 
 
 == Why
 
-It is smart in the sense that is able to fulfill almost any kind of validation. For instance, if
+It is smart in the sense that is able to fulfill any kind of validation. For instance, if
 configured properly, it can run even validations that are :scoped by some other model.
 
 Also, it allows to add some information based on the current session, user, client... so the model
 to be created or edited can be linked to that session, user or client.
 
 It is very generic and is not tied to any specific case of use.
-
-== How it works
-
-It is installed a listener on every field of the form to be validated, so when the user leaves the
-field, a petition is made to the server. The server (the ValidationsController class) will then create
-a new model of that type, or will find the current one (if it is an edit/update operation). Then,
-the property that was edited by the user is set to this recently created model instance. Right
-afterwards, it is called a helper that will allow you (the developer) to set some special fields
-that have importance to you, as the session, current client or current user, in order to be able to
-correctly process all validations, even those that are scoped on the current user, for example. After
-calling your helper, the valid? method is called on the model; the errors[:field_name] is retrieved
-and returned to the client, for the JQuery code to process and modify the DOM.
 
 == Setup
 
@@ -40,7 +28,7 @@ Read more about what the generators do on the Wiki pages.
 
 === Application Layout
 
-Include javascripts and stylesheets (optionally) from the engine in your layout file:
+Include javascripts and stylesheets (optionally) from the engine in your application layout file:
 
   <%= stylesheet_link_tag    'application', 'realtime_validations/core' %>
   <%= javascript_include_tag 'application', 'realtime_validations/core' %>
@@ -50,6 +38,12 @@ Include javascripts and stylesheets (optionally) from the engine in your layout 
 You should use:
 
   form_validated_for
+
+instead of:
+
+  form_for
+
+where you want the engine to validate your fields automatically.
 
 === Check if the engine is correctly imported
 
@@ -63,5 +57,4 @@ and check if it contains a route for:
 
 === Examples
 
-https://github.com/ereslibre/realtime-validations-examples contains some examples that can
-be of use if you are starting to use this gem.
+realtime-validations-examples[https://github.com/ereslibre/realtime-validations-examples] contains some examples that can be of use if you are starting to use this gem.
