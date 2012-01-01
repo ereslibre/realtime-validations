@@ -10,7 +10,18 @@ function rt_validations_bind_fields()
 function rt_validations_bind_field(field)
 {
   var field_to_validate = $('#' + field.id);
-  field_to_validate.blur(rt_validations_bind_field_on_blur);
+  if (rt_validations_should_bind_field(field_to_validate)) {
+    field_to_validate.blur(rt_validations_bind_field_on_blur);
+  }
+}
+
+function rt_validations_should_bind_field(field)
+{
+  var validate = field.attr('validate');
+  if ($.isEmptyObject(validate)) {
+    return true;
+  }
+  return validate == 'true';
 }
 
 function rt_validations_bind_field_on_blur()
