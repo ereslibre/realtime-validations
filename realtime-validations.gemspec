@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Provides real time validations for free"
   s.description = "Form real time validations for free on Rails applications"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", ">= 3.1.3"
