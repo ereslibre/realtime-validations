@@ -54,7 +54,7 @@ var RealtimeValidations = {
   },
 
   path : function(form) {
-    return '/validations' + form.attr('action');
+    return '/validations' + form.attr('action') + '.json';
   },
 
   show_warning_message : function(field, errors) {
