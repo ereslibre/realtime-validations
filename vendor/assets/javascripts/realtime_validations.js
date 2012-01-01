@@ -1,15 +1,15 @@
-var RealTimeValidations = {
+var RealtimeValidations = {
 
   bind_fields : function() {
     $('form[validation="true"] :input').each(function(i, field) {
-      RealTimeValidations.bind_field(field);
+      RealtimeValidations.bind_field(field);
     });
   },
 
   bind_field : function(field) {
     var field_to_validate = $('#' + field.id);
-    if (RealTimeValidations.should_bind_field(field_to_validate)) {
-      field_to_validate.blur(RealTimeValidations.bind_field_on_blur);
+    if (RealtimeValidations.should_bind_field(field_to_validate)) {
+      field_to_validate.blur(RealtimeValidations.bind_field_on_blur);
     }
   },
 
@@ -24,7 +24,7 @@ var RealTimeValidations = {
   bind_field_on_blur : function() {
     var field = $(this);
     var form_to_validate = $('form[validation="true"]');
-    var validation_path = RealTimeValidations.path(form_to_validate);
+    var validation_path = RealtimeValidations.path(form_to_validate);
     var model = form_to_validate.attr('model');
     var field_name = field.attr('name');
     var matched = field_name.match(/(\w+)\[(\w+)_confirmation\]/);
@@ -41,14 +41,14 @@ var RealTimeValidations = {
       data_to_send = { field: field_name, value: current_value, model: model };
     }
 
-    var custom_data_to_send = RealTimeValidations.customFields();
+    var custom_data_to_send = RealtimeValidations.customFields();
     $.extend(data_to_send, custom_data_to_send);
 
     $.post(validation_path, data_to_send, function(data) {
       if ($.isEmptyObject(data.errors)) {
-        RealTimeValidations.hide_warning_message(field);
+        RealtimeValidations.hide_warning_message(field);
       } else {
-        RealTimeValidations.show_warning_message(field, data.errors);
+        RealtimeValidations.show_warning_message(field, data.errors);
       }
     });
   },
@@ -89,7 +89,7 @@ var RealTimeValidations = {
 
 };
 
-$(document).ready(RealTimeValidations.bind_fields);
+$(document).ready(RealtimeValidations.bind_fields);
 
 $(document).ajaxSend(function(e, xhr, options) {
   var token = $("meta[name='csrf-token']").attr("content");
