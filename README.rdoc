@@ -26,12 +26,15 @@ Read more about what the generators do on the Wiki pages.
 
 === Putting everything together
 
-=== Application Layout
+=== Assets pipeline
 
-Include javascripts and stylesheets (optionally) from the engine in your application layout file:
+Include javascript file and stylesheet file in your assets pipeline:
 
-  <%= stylesheet_link_tag    'application', 'realtime_validations/core' %>
-  <%= javascript_include_tag 'application', 'realtime_validations/core' %>
+  # app/assets/javascripts/application.js
+  //= require realtime_validations
+
+  # app/assets/stylesheets/application.css
+  *= require realtime_validations
 
 ==== Views
 
