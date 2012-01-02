@@ -1,63 +1,75 @@
-= Realtime Validations for Rails
+== Introduction
 
-Gem that is able to run validations on models while the form is being filled by the user.
+RealtimeValidations is a Rails 3.1 gem that allows you to easily validate your forms. It is very
+easy to use, clean and yet powerful.
 
 == Why
 
-It is smart in the sense that is able to fulfill any kind of validation. For instance, if
-configured properly, it can run even validations that are :scoped by some other model.
+It is smart in the sense that is able to fulfill any kind of validation.
 
 Also, it allows to add some information based on the current session, user, client... so the model
-to be created or edited can be linked to that session, user or client.
+has all the required information to perform a complete validation test.
 
 It is very generic and is not tied to any specific case of use.
 
-== Setup
+== Remember
+
+This gem is simple. Very simple. It is developed with some things in mind:
+
+* Forget about validations at client side.
+  * All this logic is placed at the model, and is how it should be.
+* Do not replicate logic in javascript.
+  * Never, ever replicate logic.
+  * Someone updates some validation on some model, and javascript is forgotten to be updated.
+  * You need to replicate the same logic in two different languages with their implementation
+    differences.
+  * Highly configurable.
+    * There are three hooks to configure the behaviour as you want.
+      1. Server: when the Controller module is included into the ValidationsController class.
+         * Here you can remove or add filters.
+      2. Server: before asking for the model validity.
+         * You can add extra information to the model here based on the knowledge of the current
+           situation of the ApplicationController, such as the current client id or user id.
+      3. Client: before sending the request to the ValidationsController.
+         * Here you are able to add more information to the request, for instance retrieving it
+           from a meta tag on the page or wherever you want, is up to you.
+
+== Dependencies
+
+RealtimeValidations gem does not have too many dependencies:
+
+* Rails 3.1.
+* jquery-rails.
+
+== Installation
+
+Installation is very easy on your own project:
 
 === Gemfile
 
-  gem 'realtime-validations'
+gem 'realtime-validations'
 
 === Running generators
 
-  rails g realtime_validations:install
-
-Read more about what the generators do on the Wiki pages.
-
-=== Putting everything together
+rails g realtime_validations:install
 
 === Assets pipeline
 
-Include javascript file and stylesheet file in your assets pipeline:
+Include the core javascript of the application:
 
-  # app/assets/javascripts/application.js
-  //= require realtime_validations
+# app/assets/javascripts/application.js
+//= require realtime_validations
 
-  # app/assets/stylesheets/application.css
-  *= require realtime_validations
+For now it is necessary to include the stylesheet too, but it will be optional in next versions:
 
-==== Views
+# app/assets/stylesheets/application.css
+*= require realtime_validations
 
-You should use:
+== Usage
 
-  form_validated_for
+Usage is very transparent from your project:
 
-instead of:
+=== Views
 
-  form_for
-
-where you want the engine to validate your fields automatically.
-
-=== Check if the engine is correctly imported
-
-Run:
-
-  rake routes
-
-and check if it contains a route for:
-
-  POST   /validations/*args(.:format) realtime_validations/validations#validate
-
-=== Examples
-
-realtime-validations-examples[https://github.com/ereslibre/realtime-validations-examples] contains some examples that can be of use if you are starting to use this gem.
+You should use +form_validated_for+ instead of +form_for+ on your forms in order for them to
+automatically validate.

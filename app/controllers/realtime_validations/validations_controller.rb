@@ -1,6 +1,6 @@
 module RealtimeValidations
 
-  class ValidationsController < ApplicationController
+  class ValidationsController < ApplicationController #:nodoc:
 
     include Controller
 
