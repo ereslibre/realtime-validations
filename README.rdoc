@@ -23,16 +23,16 @@ This gem is simple. Very simple. It is developed with some things in mind:
   * Someone updates some validation on some model, and javascript is forgotten to be updated.
   * You need to replicate the same logic in two different languages with their implementation
     differences.
-  * Highly configurable.
-    * There are three hooks to configure the behaviour as you want.
-      1. Server: when the Controller module is included into the ValidationsController class.
-         * Here you can remove or add filters.
-      2. Server: before asking for the model validity.
-         * You can add extra information to the model here based on the knowledge of the current
-           situation of the ApplicationController, such as the current client id or user id.
-      3. Client: before sending the request to the ValidationsController.
-         * Here you are able to add more information to the request, for instance retrieving it
-           from a meta tag on the page or wherever you want, is up to you.
+* Highly configurable.
+  * There are three hooks to configure the behaviour as you want.
+    1. Server: when the Controller module is included into the ValidationsController class.
+       * Here you can remove or add filters.
+    2. Server: before asking for the model validity.
+       * You can add extra information to the model here based on the knowledge of the current
+         situation of the ApplicationController, such as the current client id or user id.
+    3. Client: before sending the request to the ValidationsController.
+       * Here you are able to add more information to the request, for instance retrieving it
+         from a meta tag on the page or wherever you want, is up to you.
 
 == Dependencies
 
@@ -57,13 +57,13 @@ rails g realtime_validations:install
 
 Include the core javascript of the application:
 
-# app/assets/javascripts/application.js
-//= require realtime_validations
+  # app/assets/javascripts/application.js
+  //= require realtime_validations
 
 For now it is necessary to include the stylesheet too, but it will be optional in next versions:
 
-# app/assets/stylesheets/application.css
-*= require realtime_validations
+  # app/assets/stylesheets/application.css
+  *= require realtime_validations
 
 == Usage
 
