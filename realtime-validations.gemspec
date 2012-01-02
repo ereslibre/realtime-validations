@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = RealtimeValidations::VERSION
   s.authors     = ["Rafael Fernández López"]
   s.email       = ["ereslibre@gmail.com"]
-  s.homepage    = "http://www.ereslibre.es/"
+  s.homepage    = "https://github.com/ereslibre/realtime-validations/wiki"
   s.summary     = "Provides real time validations for free"
   s.description = "Form real time validations for free on Rails applications"
 
@@ -17,6 +17,5 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", ">= 3.1.3"
-
-  s.add_development_dependency "sqlite3"
+  s.add_dependency "jquery-rails", ">= 2.0.0"
 end
