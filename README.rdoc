@@ -60,7 +60,7 @@ Include the core javascript of the application:
   # app/assets/javascripts/application.js
   //= require realtime_validations
 
-For now it is necessary to include the stylesheet too, but it will be optional in next versions:
+If you want to use the default error messages, you need to include the stylesheet too:
 
   # app/assets/stylesheets/application.css
   *= require realtime_validations
@@ -73,3 +73,18 @@ Usage is very transparent from your project:
 
 You should use +form_validated_for+ instead of +form_for+ on your forms in order for them to
 automatically validate.
+
+=== Error messages
+
+You can write your own error messages handlers. There are two hooks in JQuery that will be executed
+in order to show and hide errors, and that can be found commented out on the JS file installed by
+the generator.
+
+  RealtimeValidations.showErrors = function(field, errors) {
+  }
+
+  RealtimeValidations.hideErrors = function(field) {
+  }
+
+There is a default implementation for both, and you can use that one if you want. If you need a more
+personalized error reporting or more sophisticated you will have to code your own. :)

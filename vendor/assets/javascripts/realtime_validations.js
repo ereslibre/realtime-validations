@@ -64,6 +64,22 @@ var RealtimeValidations = {
     }
     field.attr('valid', false);
     field.attr('validation-errors', errors);
+    RealtimeValidations.showErrors(field, errors);
+  },
+
+  hide_warning_message : function(field) {
+    field.attr('valid', true);
+    field.attr('validation-errors', null);
+    RealtimeValidations.hideErrors(field);
+  },
+
+  // Public functions (meant to be overriden if necessary):
+
+  customFields : function() {
+    return { };
+  },
+
+  showErrors : function(field, errors) {
     if ($('#' + field.attr('id') + '_error').length) {
       $('#' + field.attr('id') + '_error').remove();
     }
@@ -75,16 +91,10 @@ var RealtimeValidations = {
     $('#' + field.attr('id') + '_error').fadeIn('slow');
   },
 
-  hide_warning_message : function(field) {
-    field.attr('valid', true);
-    field.attr('validation-errors', null);
+  hideErrors : function(field) {
     $('#' + field.attr('id') + '_error').fadeOut('slow', function() {
       $(this).remove();
     });
-  },
-
-  customFields : function() {
-    return { };
   }
 
 };
