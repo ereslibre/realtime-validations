@@ -75,7 +75,9 @@
 # automatically validate.
 module RealtimeValidations
 
-  class RealtimeValidations < Rails::Engine #:nodoc:
+  # @private
+  # :nodoc:
+  class RealtimeValidations < Rails::Engine
   end
 
 end

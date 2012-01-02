@@ -2,9 +2,13 @@ require 'rails/generators'
 
 module RealtimeValidations
 
-  module Generators #:nodoc:
+  # @private
+  # :nodoc:
+  module Generators
 
-    class InstallGenerator < Rails::Generators::Base #:nodoc:
+    # @private
+    # :nodoc:
+    class InstallGenerator < Rails::Generators::Base
 
       source_root File.join(File.dirname(__FILE__), 'templates')
 

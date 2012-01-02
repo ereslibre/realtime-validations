@@ -1,6 +1,8 @@
 module RealtimeValidations
 
-  class ValidationsController < ApplicationController #:nodoc:
+  # @private
+  # :nodoc:
+  class ValidationsController < ApplicationController
 
     include Controller
 
