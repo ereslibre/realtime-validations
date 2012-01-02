@@ -47,11 +47,11 @@ Installation is very easy on your own project:
 
 === Gemfile
 
-gem 'realtime-validations'
+  gem 'realtime-validations'
 
 === Running generators
 
-rails g realtime_validations:install
+  rails g realtime_validations:install
 
 === Assets pipeline
 
