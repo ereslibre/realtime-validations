@@ -76,9 +76,7 @@ var RealtimeValidations = {
   showErrorsSmoothly : function(field, errors) {
     field.parent().append('<div style="display: none;" id="' + field.attr('id') + '_error" class="field-error">'
                             + errors.join(', ') +
-                            '<div class="field-error-arrow-border"></div> \
-                             <div class="field-error-arrow"></div>        \
-                           </div>');
+                          '</div>');
     $('#' + field.attr('id') + '_error').fadeIn('slow');
   },
 
