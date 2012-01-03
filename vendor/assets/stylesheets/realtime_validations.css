@@ -43,6 +43,14 @@ div.field-valid {
   display: inline-block;
   position: absolute;
   padding: 0;
+  padding-left: 5px;
+  padding-right: 5px;
   margin: 0;
   margin-top: 5px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-box-shadow:0 0 5px #888888;
+  -webkit-box-shadow:0 0 5px #888888;
+  background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+  background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
 }
