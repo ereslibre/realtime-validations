@@ -82,6 +82,13 @@ var RealtimeValidations = {
     $('#' + field.attr('id') + '_error').fadeIn('slow');
   },
 
+  showValidSmoothly : function(field) {
+    field.parent().append('<div style="display: none;" id="' + field.attr('id') + '_valid" class="field-valid"> \
+                             <img src="/assets/valid_field.png"> \
+                           </div>');
+    $('#' + field.attr('id') + '_valid').fadeIn('slow');
+  },
+
   // Public functions (meant to be overriden if necessary):
 
   customFields : function() {
@@ -91,7 +98,12 @@ var RealtimeValidations = {
   showErrors : function(field, errors) {
     if ($('#' + field.attr('id') + '_error').length) {
       $('#' + field.attr('id') + '_error').fadeOut('slow', function() {
-        $('#' + field.attr('id') + '_error').remove();
+        $(this).remove();
+        RealtimeValidations.showErrorsSmoothly(field, errors);
+      });
+    } else if ($('#' + field.attr('id') + '_valid').length) {
+      $('#' + field.attr('id') + '_valid').fadeOut('slow', function() {
+        $(this).remove();
         RealtimeValidations.showErrorsSmoothly(field, errors);
       });
     } else {
@@ -100,9 +112,16 @@ var RealtimeValidations = {
   },
 
   hideErrors : function(field) {
-    $('#' + field.attr('id') + '_error').fadeOut('slow', function() {
-      $(this).remove();
-    });
+    if ($('#' + field.attr('id') + '_error').length) {
+      $('#' + field.attr('id') + '_error').fadeOut('slow', function() {
+        $(this).remove();
+        RealtimeValidations.showValidSmoothly(field);
+      });
+    } else if ($('#' + field.attr('id') + '_valid').length) {
+      return;
+    } else {
+      RealtimeValidations.showValidSmoothly(field);
+    }
   }
 
 };
