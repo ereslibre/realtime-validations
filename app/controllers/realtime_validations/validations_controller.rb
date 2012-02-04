@@ -10,9 +10,10 @@ module RealtimeValidations
       args = identify_args
       begin
         field = identify_field
-      rescue Exceptions::InvalidData
+      rescue RealtimeValidationsExceptions::InvalidData
+        errors = Rails.env.production? ? [] : ['could not identify field']
         render :json => { :field => params[:field],
-                          :errors => [] }
+                          :errors => errors }
         return
       end
       model = retrieve_or_create_model args, params[:model]
@@ -35,7 +36,7 @@ module RealtimeValidations
     end
 
     def identify_field
-      raise Exceptions::InvalidData unless params[:field] =~ /^[^\[]+\[(\w+)\]$/
+      raise RealtimeValidationsExceptions::InvalidData unless params[:field] =~ /^[^\[]+\[(\w+)\]$/
       $1
     end
 
@@ -54,10 +55,16 @@ module RealtimeValidations
       validates = params[:validates]
       args.each do |key, value|
         full_key = key.to_s.singularize
-        model.send "#{full_key}=", value if model.respond_to? full_key.to_sym
+        begin
+          model.send "#{full_key}=", value
+        rescue NoMethodError
+        end
       end
-      model.send "#{field}=", value
-      model.send "#{field}_confirmation=", validates if validates
+      begin
+        model.send "#{field}=", value
+        model.send "#{field}_confirmation=", validates if validates
+      rescue NoMethodError
+      end
       before_model_validation model if respond_to? :before_model_validation
     end
 
