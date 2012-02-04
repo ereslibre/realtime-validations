@@ -11,9 +11,8 @@ module RealtimeValidations
       begin
         field = identify_field
       rescue RealtimeValidationsExceptions::InvalidData
-        errors = Rails.env.production? ? [] : ['could not identify field']
         render :json => { :field => params[:field],
-                          :errors => errors }
+                          :errors => [] }
         return
       end
       model = retrieve_or_create_model args, params[:model]
